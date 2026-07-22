@@ -6,7 +6,7 @@ class Settings(BaseSettings):
 
     DEBUG: bool = True
 
-    OPENAI_API_KEY: str
+    OPENAI_API_KEY: str = "sk-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 
     HOST: str = "0.0.0.0"
 
