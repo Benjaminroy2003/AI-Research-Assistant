@@ -12,6 +12,8 @@ class Settings(BaseSettings):
 
     PORT: int = 8000
 
+    model_name: str = "Qwen/Qwen2.5-1.5B-Instruct"
+
     class Config:
         env_file = ".env"
 

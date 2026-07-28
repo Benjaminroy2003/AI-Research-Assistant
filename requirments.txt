@@ -15,3 +15,9 @@ httpx
 python-multipart
 
 orjson
+
+transformers
+
+pytorch
+
+accelerate
