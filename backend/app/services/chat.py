@@ -1,11 +1,9 @@
-# app/services/chat.py
-
-from app.llm.hugging_face import LLM
+from app.llm.base import BaseLLM
 
 
 class ChatService:
-    def __init__(self):
-        self.llm = LLM()
+    def __init__(self, llm: BaseLLM):
+        self.llm = llm
 
-    def generate_text(self, prompt: str, max_length: int = 100):
-        return self.llm.generate_text(prompt, max_length)
+    def generate_text(self, prompt: str, *, max_length: int = 100) -> str:
+        return self.llm.generate_text(prompt, max_length=max_length)
