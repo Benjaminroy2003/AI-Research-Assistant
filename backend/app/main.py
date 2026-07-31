@@ -1,10 +1,23 @@
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
-from app.core.config import settings
+
 from app.api.v1.router import router as api_router
+from app.core.config import settings
+from app.llm.factory import create_llm
 
 
-print(f"Starting {settings.APP_NAME} in {'debug' if settings.DEBUG else 'production'} mode on {settings.HOST}:{settings.PORT}")
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    app.state.llm = create_llm()
+    yield
 
-app = FastAPI(title=settings.APP_NAME, debug=settings.DEBUG)
+
+print(
+    f"Starting {settings.APP_NAME} in {'debug' if settings.DEBUG else 'production'} mode "
+    f"on {settings.HOST}:{settings.PORT}"
+)
+
+app = FastAPI(title=settings.APP_NAME, debug=settings.DEBUG, lifespan=lifespan)
 
 app.include_router(api_router)
